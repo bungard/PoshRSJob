@@ -49,7 +49,7 @@ Describe "PoshRSJob PS$($PSVersion)" {
             $PSCmdlet.SessionState.PSVariable.Get('runspacepools').Name | Should Be 'RunspacePools'
             $PSCmdlet.SessionState.PSVariable.Get('RunspacePoolCleanup').Name | Should Be 'RunspacePoolCleanup'
             $PSCmdlet.SessionState.PSVariable.Get('JobCleanup').Name | Should Be 'JobCleanup'
-            $PSCmdlet.SessionState.PSVariable.Get('JobID').Name | Should Be 'JobID'
+            $PSCmdlet.SessionState.PSVariable.Get('PoshRS_JobID').Name | Should Be 'PoshRS_JobID'
             $PSCmdlet.SessionState.PSVariable.Get('Jobs').Name | Should Be 'Jobs'
         }
     }
@@ -234,7 +234,7 @@ Describe "Module OnRemove Actions PS$PSVersion" {
         It 'should remove all variables' {
             {Get-Variable Jobs -ErrorAction Stop} | Should Throw
             {Get-Variable JobCleanup -ErrorAction Stop} | Should Throw
-            {Get-Variable JobID -ErrorAction Stop} | Should Throw
+            {Get-Variable PoshRS_JobID -ErrorAction Stop} | Should Throw
             {Get-Variable RunspacePoolCleanup -ErrorAction Stop} | Should Throw
             {Get-Variable RunspacePools -ErrorAction Stop} | Should Throw
         }

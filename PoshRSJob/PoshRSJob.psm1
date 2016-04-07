@@ -56,7 +56,7 @@ Add-Type -TypeDefinition @"
 Write-Verbose "Creating RS collections"
 New-Variable Jobs -Value ([System.Collections.ArrayList]::Synchronized([System.Collections.ArrayList]@())) -Option AllScope,ReadOnly -Scope Global
 New-Variable JobCleanup -Value ([hashtable]::Synchronized(@{})) -Option AllScope,ReadOnly -Scope Global
-New-Variable JobID -Value ([int64]0) -Option AllScope,ReadOnly -Scope Global
+New-Variable PoshRS_JobID -Value ([int64]0) -Option AllScope,ReadOnly -Scope Global
 New-Variable RunspacePools -Value ([System.Collections.ArrayList]::Synchronized([System.Collections.ArrayList]@())) -Option AllScope,ReadOnly -Scope Global
 New-Variable RunspacePoolCleanup -Value ([hashtable]::Synchronized(@{})) -Option AllScope,ReadOnly -Scope Global
 #endregion RSJob Collections
@@ -226,7 +226,7 @@ $ExecutionContext.SessionState.Module.OnRemove ={
     $jobCleanup.PowerShell.Dispose()    
     $RunspacePoolCleanup.PowerShell.EndInvoke($RunspacePoolCleanup.Handle)
     $RunspacePoolCleanup.PowerShell.Dispose()
-    Remove-Variable JobId -Scope Global -Force
+    Remove-Variable PoshRS_JobId -Scope Global -Force
     Remove-Variable Jobs -Scope Global -Force
     Remove-Variable JobCleanup -Scope Global -Force
     Remove-Variable RunspacePoolCleanup -Scope Global -Force
